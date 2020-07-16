@@ -19,9 +19,9 @@ pg2mysql takes following parameters
 
 ##Example:
 
-./pg2mysql newDBname newDBuser newDBpass schemafile db.sql
+./pg2mysql.sh newDBname newDBuser newDBpass schemafile db.sql
 
-$ ./mysql-db-create.sh testDB foo bar testDB.sql db.sql
+$ ./pg2mysql.sh testDB foo bar testDB.sql db.sql
 Enter password:
 Database testDB and user foo created with a password bar with schema imported from testDB.sql and data migrated from db.sql
 

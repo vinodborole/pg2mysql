@@ -17,7 +17,7 @@ pg2mysql takes following parameters
 4. Schema file containing table creation queries
 5. data file -> exported from pg_dump command in the form of all insert queries
 
-##Example:
+## Example:
 
 ./pg2mysql.sh newDBname newDBuser newDBpass schemafile db.sql
 

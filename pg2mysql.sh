@@ -1,6 +1,6 @@
 #!/bin/bash
 
-EXPECTED_ARGS=6
+EXPECTED_ARGS=7
 E_BADARGS=65
 MYSQL=`which mysql`
 
@@ -17,17 +17,27 @@ sed -i '' 's/public.//g' $6
 sed -i '' '/schema_migrations/d' $6
 sed -i '' 's/+[[:digit:]]\{2\}:[[:digit:]]\{2\}//g' $6
 
+while read line
+  do
+  table=`echo $line | cut -d',' -f1`
+  cols=`echo $line | cut -d',' -f2`
+  sed -i '' "/ ${table} /{$cols;}" $6
+done < $7
+
 Q1="CREATE DATABASE IF NOT EXISTS $NEWDBASE;"
-Q2="GRANT ALL ON $NEWDBASE.* TO '$NEWUSER'@'$HOST' IDENTIFIED BY '$NEWPASS';"
-Q3="FLUSH PRIVILEGES;"
+Q2="CREATE USER $NEWUSER@$HOST IDENTIFIED BY '$NEWPASS';"
+Q3="GRANT ALL PRIVILEGES ON $NEWDBASE.* TO $NEWUSER@$HOST;"
+Q4="FLUSH PRIVILEGES;"
 
-Q4="USE $NEWDBASE;"
-Q5="SOURCE $5;"
-Q6="SOURCE $6;"
+Q5="USE $NEWDBASE;"
+TMP="set sql_mode='';"
+Q6="SOURCE $5;"
+Q7="SOURCE $6;"
 
-SQL1="${Q1}${Q2}${Q3}"
-SQL2="${Q4}${Q5}${Q6}"
-
+SQL1="${Q1}${Q2}${Q3}${Q4}"
+SQL2="${Q5}${TMP}${Q6}${Q7}"
+echo $SQL1
+echo $SQL2
 if [ $# -ne $EXPECTED_ARGS ]
 then
   echo "Usage: $0 dbname dbuser dbpass dbPort schemafile datafile"

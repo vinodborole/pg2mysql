@@ -1,2 +1,1 @@
-kv_store,s/key/ckey/;s/value/cvalue/
-kv_store_1,s/key/xkey/;s/value/xvalue/;s/secret/xsecret/
+kv_store,s/key/ckey/

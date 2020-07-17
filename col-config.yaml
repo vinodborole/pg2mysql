@@ -1,0 +1,6 @@
+kv_store:
+  old: key
+  new: ckey
+kv_store1:
+  old: value
+  new: cvalue

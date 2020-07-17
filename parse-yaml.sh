@@ -14,7 +14,6 @@ function parse_yaml {
       if (length($3) > 0) {
          vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
          printf("%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, $3);
-         printf($3)
       }
    }'
 }

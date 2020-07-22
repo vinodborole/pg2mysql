@@ -36,11 +36,10 @@ Q7="SOURCE $6;"
 
 SQL1="${Q1}${Q2}${Q3}${Q4}"
 SQL2="${Q5}${TMP}${Q6}${Q7}"
-echo $SQL1
-echo $SQL2
+
 if [ $# -ne $EXPECTED_ARGS ]
 then
-  echo "Usage: $0 dbname dbuser dbpass dbPort schemafile datafile"
+  echo "Usage: $0 dbname dbuser dbpass dbPort schemafile datafile colConfig"
   exit $E_BADARGS
 fi
 
